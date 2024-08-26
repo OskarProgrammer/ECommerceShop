@@ -12,7 +12,7 @@ import { HomeLayout, homeLayoutLoader } from './layouts/HomeLayout'
 
 //importing pages
 import { ErrorPage } from './pages/ErrorPage'
-import { HomePage, homePageAction, homePageLoader } from './pages/HomePage'
+import { HomePage, homePageLoader } from './pages/HomePage'
 import { LoginPage, loginPageAction } from './pages/LoginPage'
 import { LogOutPage , logOutLoader} from './pages/LogOutPage'
 import { Basket, basketLoader } from './pages/Basket'
@@ -21,8 +21,8 @@ import { Basket, basketLoader } from './pages/Basket'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<HomeLayout/>} errorElement={<ErrorPage/>} loader={homeLayoutLoader}> 
-      <Route index element={<HomePage/>} loader={homePageLoader} action={homePageAction}/>
+    <Route path="/" element={<HomeLayout />} loader={homeLayoutLoader} errorElement={<ErrorPage/>}> 
+      <Route index element={<HomePage/>} loader={homePageLoader} />
       <Route path="/login" element={<LoginPage />} action={loginPageAction}/>
       <Route path="/logOut" element={<LogOutPage/>} loader={logOutLoader}/>
       <Route path="/basket/:id" element={<Basket/>} loader={basketLoader}/>
