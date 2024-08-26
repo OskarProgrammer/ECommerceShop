@@ -1,7 +1,8 @@
-import { NavLink, Outlet } from "react-router-dom"
+import { NavLink, Outlet, useLoaderData } from "react-router-dom"
+import { getRequest } from "../API/getRequest"
 
 export const HomeLayout = () => {
-
+    const loaderData = useLoaderData()
 
     return(
         <div className="container col-lg-12 col-md-12 col-sm-12 col-10 text-light bg-dark text-center rounded">
@@ -11,7 +12,7 @@ export const HomeLayout = () => {
                     <NavLink to="/" className="btn btn-outline-light btn-lg"><i className="bi bi-house"></i></NavLink>
                 </div>
                 <div className="container col-lg-5 col-md-5 col-sm-5 col-5 text-end">
-                    <NavLink to="/login" className="btn btn-outline-light btn-lg">Sign in</NavLink>
+                    {!loaderData.isLogged ? <NavLink to="/login" className="btn btn-outline-light btn-lg">Sign in</NavLink> : ""}
                 </div>
             </div>
 
@@ -20,4 +21,10 @@ export const HomeLayout = () => {
             </div>
         </div>
     )
+}
+
+
+export const homeLayoutLoader = async () => {
+    const currentUser = await getRequest("http://localhost:3000/currentUser")
+    return currentUser
 }
