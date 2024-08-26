@@ -13,7 +13,7 @@ export const HomeLayout = () => {
                 </div>
                 <div className="container col-lg-5 col-md-5 col-sm-5 col-5 text-end">
                     {!loaderData.isLogged ? <NavLink to="/login" className="btn btn-outline-success btn-lg">Sign in</NavLink> : ""}
-                    
+                    {loaderData.isLogged ? <NavLink to={`/basket/${loaderData.id}`} className="btn btn-outline-dark btn-lg mx-3"><i className="bi bi-basket"></i></NavLink> : ""}
                     {loaderData.isLogged ? <NavLink to="/logOut" className="btn btn-outline-danger btn-lg">Log out</NavLink> : ""}
                 </div>
             </div>

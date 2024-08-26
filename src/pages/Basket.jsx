@@ -30,6 +30,7 @@ export const basketLoader = async ({params}) => {
     }
 
     const basket = await getRequestID("http://localhost:3000/baskets/", id)
+    console.log(basket)
 
     return basket
 }

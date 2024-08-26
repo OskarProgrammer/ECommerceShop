@@ -1,8 +1,8 @@
 {
   "currentUser": {
-    "id": "1",
-    "isLogged": true,
-    "isAdmin": true
+    "id": "",
+    "isLogged": false,
+    "isAdmin": false
   },
   "users": [
     {
@@ -14,11 +14,18 @@
   ],
   "items": [
     {
-      "id" : "1",
-      "name": "Gaśnica",
+      "id": "1",
+      "name": "Gas stove",
       "price": 25,
       "description": "Thing to calm the fire with water",
       "amount": 100
+    },
+    {
+      "id": "2",
+      "name": "Knife",
+      "price": 10,
+      "description": "Very sharp, perfect to kitchen!",
+      "amount": 50
     }
   ],
   "baskets": [
