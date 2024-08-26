@@ -15,6 +15,7 @@ import { ErrorPage } from './pages/ErrorPage'
 import { HomePage } from './pages/HomePage'
 import { LoginPage, loginPageAction } from './pages/LoginPage'
 import { LogOutPage , logOutLoader} from './pages/LogOutPage'
+import { Basket, basketLoader } from './pages/Basket'
 
 
 
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       <Route index element={<HomePage/>}/>
       <Route path="/login" element={<LoginPage />} action={loginPageAction}/>
       <Route path="/logOut" element={<LogOutPage/>} loader={logOutLoader}/>
+      <Route path="/basket/:id" element={<Basket/>} loader={basketLoader}/>
     </Route>
   )
 )
