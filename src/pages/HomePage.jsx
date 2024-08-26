@@ -1,10 +1,27 @@
-import { Form, redirect, useLoaderData } from "react-router-dom"
+import { redirect, useLoaderData } from "react-router-dom"
 import { getRequest } from "../API/getRequest"
 import { getRequestID } from "../API/getRequestID"
 import { putRequest } from "../API/putRequest"
 
+
 export const HomePage = () => {
     const [items, currentUser] = useLoaderData()
+
+    const addToBasket = async (id) => {
+        const currentUser = await getRequest("http://localhost:3000/currentUser")
+        const currentBasket = await getRequestID("http://localhost:3000/baskets/", currentUser.id)
+        let items = await getRequestID("http://localhost:3000/items/", id)
+
+        items.amount = items.amount - 1
+
+
+        currentBasket.items.push(id)
+
+        await putRequest(`http://localhost:3000/baskets/${currentUser.id}`, currentBasket)
+        await putRequest(`http://localhost:3000/items/${id}`, items)
+
+        return redirect("/")
+    }
 
     return (
         <div className="container text-center">
@@ -19,11 +36,11 @@ export const HomePage = () => {
                         <p>{item.price}</p>
                         <h5>Amount:</h5>
                         <p>{item.amount}</p>
-                            {currentUser.isLogged ? <Form method="post" action="/" className="d-flex flex-column p-3">
-                                <h5>Id of product: <span name="id">{item.id}</span></h5>
-                                <input type="number" name="amount" className="col-lg-2 col-5 mx-auto mb-2 text-center" />
-                                <button type="submit" className="btn btn-outline-success btn-lg col-lg-5 mx-auto ">Add to basket</button>
-                            </Form> : ""}
+                            {currentUser.isLogged ?
+                                <>
+                                    <button type="submit" className="btn btn-outline-success btn-lg col-lg-5 mx-auto ">Add to basket</button>
+                                </>
+                             : ""}
                     </div>}
                     {index % 2 == 0 ? <div className="col-lg-6 text-light p-3">
                         <h5 className="">Description:</h5>
@@ -32,11 +49,9 @@ export const HomePage = () => {
                         <p>{item.price}</p>
                         <h5>Amount:</h5>
                         <p>{item.amount}</p>
-                        {currentUser.isLogged ? <Form method="post" action="/" className="d-flex flex-column p-3">
-                            <h5>Id of product: <span name="id">{item.id}</span></h5>
-                            <input type="number" name="amount" className="col-lg-2 col-5 mx-auto mb-2 text-center" />
-                            <button type="submit" className="btn btn-outline-success btn-lg col-lg-5 mx-auto ">Add to basket</button>
-                        </Form> : ""}
+                        {currentUser.isLogged ? <>
+                            <button type="submit" className="btn btn-outline-success btn-lg col-lg-5 mx-auto" onClick={()=>{addToBasket(item.id)}}>Add to basket</button>
+                        </> : ""}
                     </div> : <div className="col-lg-6 my-auto text-light">
                         <h2 className="display-3 bg-light text-dark rounded-pill">{item.name}</h2>
                     </div>}
@@ -52,25 +67,3 @@ export const homePageLoader = async () => {
 
     return [items, currentUser]
 }
-
-export const homePageAction = async ({request}) => {
-    const data = await request.formData()
-    const idOfItem = data.get("id")
-    const amount = data.get("amount")
-    
-    console.log(idOfItem, amount)
-
-    const currentUser = await getRequest("http://localhost:3000/currentUser")
-    const currentBasket = await getRequestID("http://localhost:3000/baskets/", currentUser.id)
-    let items = await getRequestID("http://localhost:3000/items/", idOfItem)
-
-    items.amount = items.amount - amount
-
-    currentBasket.items.push(idOfItem)
-
-    await putRequest(`http://localhost:3000/baskets/${currentUser.id}`, currentBasket)
-    await putRequest(`http://localhost:3000/items/${idOfItem}`, items)
-
-    return redirect("/")
-}
-
