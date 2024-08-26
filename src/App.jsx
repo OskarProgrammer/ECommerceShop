@@ -13,7 +13,8 @@ import { HomeLayout, homeLayoutLoader } from './layouts/HomeLayout'
 //importing pages
 import { ErrorPage } from './pages/ErrorPage'
 import { HomePage } from './pages/HomePage'
-import { LoginPage } from './pages/LoginPage'
+import { LoginPage, loginPageAction } from './pages/LoginPage'
+import { LogOutPage , logOutLoader} from './pages/LogOutPage'
 
 
 
@@ -21,7 +22,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<HomeLayout/>} errorElement={<ErrorPage/>} loader={homeLayoutLoader}> 
       <Route index element={<HomePage/>}/>
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/login" element={<LoginPage />} action={loginPageAction}/>
+      <Route path="/logOut" element={<LogOutPage/>} loader={logOutLoader}/>
     </Route>
   )
 )
