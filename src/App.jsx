@@ -8,7 +8,7 @@ import './App.css'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 
 //importring layouts
-import { HomeLayout } from './layouts/HomeLayout'
+import { HomeLayout, homeLayoutLoader } from './layouts/HomeLayout'
 
 //importing pages
 import { ErrorPage } from './pages/ErrorPage'
@@ -19,7 +19,7 @@ import { LoginPage } from './pages/LoginPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<HomeLayout/>} errorElement={<ErrorPage/>}> 
+    <Route path="/" element={<HomeLayout/>} errorElement={<ErrorPage/>} loader={homeLayoutLoader}> 
       <Route index element={<HomePage/>}/>
       <Route path="/login" element={<LoginPage />} />
     </Route>
