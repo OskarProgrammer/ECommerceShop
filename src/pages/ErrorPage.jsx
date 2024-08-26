@@ -8,7 +8,7 @@ export const ErrorPage = () => {
             <h1 className="display-1">
                 Ops there was an error!!!
             </h1>
-            <p className="display-4">Error message == {error.message}</p>
+            <p className="display-4 fw-bolder">{error.message}</p>
             <Link to="/" className="btn btn-outline-dark btn-lg m-5">Home Page</Link>
         </div>
     )
