@@ -1,11 +1,30 @@
 {
-    "users": [
-        {
-            "id": "1",
-            "login": "Oskar",
-            "password": "root",
-            "isAdmin": true
-        }
-    ],
-    "currentUser": {}
+  "currentUser": {
+    "id": "1",
+    "isLogged": true,
+    "isAdmin": true
+  },
+  "users": [
+    {
+      "id": "1",
+      "login": "Oskar",
+      "password": "root",
+      "isAdmin": true
+    }
+  ],
+  "items": [
+    {
+      "id" : "1",
+      "name": "Gaśnica",
+      "price": 25,
+      "description": "Thing to calm the fire with water",
+      "amount": 100
+    }
+  ],
+  "baskets": [
+    {
+      "id": "1",
+      "items": []
+    }
+  ]
 }
